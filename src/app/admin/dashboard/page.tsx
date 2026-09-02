@@ -247,7 +247,7 @@ export default function AdminDashboard() {
       {/* Sidebar */}
       <aside className="admin-sidebar">
         <div className="admin-sidebar-logo">
-          <Image src="/assets/01_logo.png" alt="Forge Studio" width={36} height={36} style={{ objectFit: "contain" }} />
+          <Image src="/assets/forge-admin-white-logo.png" alt="Forge Studio" width={36} height={36} style={{ objectFit: "contain", borderRadius: "6px" }} />
           <div className="admin-sidebar-logo-text">
             <span className="title">FORGE</span>
             <span className="subtitle">ADMIN DASHBOARD</span>
