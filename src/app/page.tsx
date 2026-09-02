@@ -465,13 +465,6 @@ export default function ComingSoonPage() {
                   )}
                 </div>
 
-                {validationError && (
-                  <div className="cs-mobile-validation-banner">
-                    <div className="cs-tooltip-icon-badge">!</div>
-                    <span>{validationError}</span>
-                  </div>
-                )}
-
                 <button
                   type="submit"
                   className={`cs-mobile-submit-btn ${isSuccess ? "cs-btn-success" : ""}`}
