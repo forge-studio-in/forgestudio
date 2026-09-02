@@ -1,0 +1,136 @@
+FORGE STUDIO — EXACT REBUILD PROMPT
+
+You are rebuilding the uploaded Forge Studio Coming Soon page from the supplied reference image and the supplied /forge_coming_soon_assets folder.
+
+NON-NEGOTIABLE VISUAL RULE
+The uploaded reference image is the design source of truth. Do not redesign, modernize, reinterpret, recolor, change fonts, change spacing, change proportions, add sections, or simplify anything. At the reference desktop viewport, the implementation must match the supplied reference as closely as possible.
+
+REFERENCE CANVAS
+The supplied reference image is 1820 × 864 px, aspect ratio ≈ 2.1065:1.
+Use this as the exact desktop coordinate system. Read layout_coordinates.json and use those coordinates/proportions as the positional baseline.
+
+STATIC IMAGE ASSETS
+Use the supplied PNG files directly for the static visual elements:
+01_logo_forge_studio_transparent_HD.png
+02_service_line_transparent_HD.png
+03_something_powerful_is_transparent_HD.png
+04_coming_soon_transparent_HD.png
+05_forge_studio_hero_transparent_HD.png
+06_divider_and_description_transparent_HD.png
+
+Do not retype or redraw these static text/logo elements. They were cropped from the approved reference so that the original font, color, spacing, and appearance remain unchanged.
+
+RIGHT-SIDE VISUAL
+Use 10_right_cloth_visual_HD.png / 11_right_scene_positioning_reference_HD.png only as visual/reference assets as appropriate. Preserve the exact scale and position seen in 00_full_reference_1820x864.png. Do not enlarge or crop the cloth unnecessarily.
+
+DYNAMIC COUNTDOWN — MUST BE REAL HTML/CSS
+07_countdown_REFERENCE_ONLY_HD.png is REFERENCE ONLY.
+Rebuild the countdown as actual DOM elements so the numbers can change.
+Match its border, radius, spacing, typography, green number color, black labels, separators and exact dimensions.
+Display DAYS / HOURS / MINUTES / SECONDS.
+Target date/time comes from the backend/admin dashboard.
+Never show negative values. At zero show 00 / 00 / 00 / 00.
+Do not use a screenshot for the dynamic numbers.
+
+DYNAMIC SUBSCRIPTION FORM — MUST BE REAL HTML
+08_notify_form_REFERENCE_ONLY_HD.png is REFERENCE ONLY.
+Rebuild it as a real accessible form, visually matching the reference exactly:
+paper-plane icon area
+“Be the first to know when we launch.”
+email input
+green “NOTIFY ME” button
+
+On submit:
+- validate email
+- POST to backend
+- save subscriber email in MongoDB
+- prevent duplicates
+- show a subtle success/error state without moving the layout
+- subscriber must appear in Admin Dashboard
+
+FOOTER — REAL CLICKABLE LINKS
+09_footer_REFERENCE_ONLY_HD.png is REFERENCE ONLY.
+Rebuild the footer in HTML/CSS so all links are real and admin-editable.
+Match the reference visually: dark green rounded bar, spacing, separators, icons, typography.
+
+Required footer items:
+- Website: forgestudio.in → open configured website URL
+- Email: hello@forgestudio.in → use mailto: configured email
+- WhatsApp number → open configured WhatsApp chat
+- FOLLOW US
+- Instagram
+- Facebook
+- YouTube
+
+IMPORTANT: Replace the LinkedIn item from the visual reference with FACEBOOK. Do not include LinkedIn.
+
+ADMIN DASHBOARD — ONLY THESE FEATURES
+Keep admin extremely minimal and use the same Forge color palette.
+
+1. Launch Date / Time
+   - date + time picker
+   - save to MongoDB
+   - public countdown reads this value
+
+2. Subscribers
+   - total subscriber count
+   - table: email + subscribed date/time
+   - search
+   - delete
+   - optional CSV export
+
+3. Contact & Social Links
+   Editable:
+   - Website URL
+   - Contact Email
+   - WhatsApp Number
+   - Instagram URL
+   - Facebook URL
+   - YouTube URL
+   Save to MongoDB; public footer reads these values.
+
+BACKEND / DATABASE
+Node.js + Express
+MongoDB + Mongoose
+Secure admin authentication
+Environment variables
+Input validation
+Rate limit public subscription endpoint
+CORS configured only for the real public/admin frontend origins
+
+Suggested models:
+SiteSettings:
+- launchDate
+- websiteUrl
+- contactEmail
+- whatsappNumber
+- instagramUrl
+- facebookUrl
+- youtubeUrl
+- updatedAt
+
+Subscriber:
+- email (unique, normalized/lowercase)
+- createdAt
+
+Admin:
+- username/email
+- passwordHash
+
+RESPONSIVENESS
+Desktop reference is the priority.
+At 1820×864, match the supplied reference positioning first.
+Use proportional scaling/positioning rather than a generic 50/50 layout.
+Do not use object-fit: cover in a way that changes the composition.
+For other desktop sizes, scale proportionally.
+For mobile/tablet, adapt carefully while retaining the same brand identity.
+
+IMPORTANT
+Do not recreate static typography with substitute fonts when an approved PNG is provided.
+Do not change green shades.
+Do not change the cloth appearance.
+Do not add animations or extra sections.
+Do not add cards, statistics, services, portfolio, testimonials, pricing, FAQ, etc.
+Do not make the page dark.
+
+Before finishing, compare the implementation side-by-side with 00_full_reference_1820x864.png and correct every visible difference in size, spacing and position.

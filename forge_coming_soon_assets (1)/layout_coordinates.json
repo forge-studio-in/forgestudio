@@ -1,0 +1,69 @@
+{
+  "reference_size_px": [
+    1820,
+    864
+  ],
+  "aspect_ratio": 2.106481,
+  "element_boxes_px": {
+    "logo": [
+      78,
+      22,
+      390,
+      112
+    ],
+    "service_line": [
+      1120,
+      25,
+      1735,
+      79
+    ],
+    "something_powerful_is": [
+      88,
+      180,
+      485,
+      218
+    ],
+    "coming_soon": [
+      86,
+      221,
+      745,
+      342
+    ],
+    "forge_studio_hero": [
+      88,
+      343,
+      745,
+      405
+    ],
+    "divider_description": [
+      87,
+      409,
+      525,
+      514
+    ],
+    "countdown": [
+      84,
+      514,
+      735,
+      651
+    ],
+    "notify_form": [
+      85,
+      650,
+      735,
+      727
+    ],
+    "footer": [
+      80,
+      746,
+      1740,
+      838
+    ],
+    "right_visual": [
+      820,
+      78,
+      1808,
+      742
+    ]
+  }
+}

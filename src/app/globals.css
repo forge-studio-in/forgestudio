@@ -1,26 +1,1519 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Bebas Neue', sans-serif;
+  --font-rajdhani: 'Rajdhani', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ===== RESET ===== */
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: #FFFFFF;
+  color: #111714;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== RESPONSIVE DISPLAY MEDIA QUERIES ===== */
+@media (min-width: 1024px) {
+  html, body {
+    overflow: hidden;
+  }
+  .cs-desktop-only {
+    display: flex !important;
+  }
+  .cs-mobile-only {
+    display: none !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (max-width: 1023px) {
+  html, body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .cs-desktop-only {
+    display: none !important;
+  }
+  .cs-mobile-only {
+    display: block !important;
+  }
+}
+
+/* ===== MASTER DESKTOP VIEWPORT CONTAINER (>= 1024px) ===== */
+.cs-wrapper {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0D2B24;
+}
+
+/* ===== FLUID FULLSCREEN CANVAS ===== */
+.cs-canvas-1820 {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/assets/reference-bg.png');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+/* ===== 1. ENTRANCE ANIMATIONS ===== */
+@keyframes csFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes csFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ===== 2. STATIC TRANSPARENT PNG ASSET OVERLAYS ===== */
+.cs-asset-logo {
+  position: absolute;
+  left: 4.286%;
+  top: 2.546%;
+  width: 17.143%;
+  height: 10.417%;
+  object-fit: contain;
+  object-position: left center;
+  z-index: 10;
+  animation: csFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
+}
+
+.cs-asset-service-line {
+  position: absolute;
+  left: 61.538%;
+  top: 2.894%;
+  width: 33.791%;
+  height: 6.250%;
+  object-fit: contain;
+  object-position: right center;
+  z-index: 10;
+  animation: csFadeIn 0.6s ease-out 0.2s backwards;
+}
+
+.cs-asset-something-powerful {
+  position: absolute;
+  left: 4.835%;
+  top: 20.833%;
+  width: 21.813%;
+  height: 4.398%;
+  object-fit: contain;
+  object-position: left center;
+  z-index: 10;
+  animation: csFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s backwards;
+}
+
+.cs-asset-coming-soon {
+  position: absolute;
+  left: 4.725%;
+  top: 25.579%;
+  width: 36.209%;
+  height: 14.005%;
+  object-fit: contain;
+  object-position: left center;
+  z-index: 10;
+  animation: csFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.35s backwards;
+}
+
+.cs-asset-forge-hero {
+  position: absolute;
+  left: 4.835%;
+  top: 39.699%;
+  width: 36.099%;
+  height: 7.176%;
+  object-fit: contain;
+  object-position: left center;
+  z-index: 10;
+  animation: csFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.45s backwards;
+}
+
+.cs-asset-divider-description {
+  position: absolute;
+  left: 4.780%;
+  top: 47.338%;
+  width: 24.066%;
+  height: 12.153%;
+  object-fit: contain;
+  object-position: left center;
+  z-index: 10;
+  animation: csFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.55s backwards;
+}
+
+/* ===== 3. DESKTOP DYNAMIC DOM COUNTDOWN ===== */
+.cs-dynamic-countdown {
+  position: absolute;
+  left: 4.615%;
+  top: 59.491%;
+  width: 34.500%;
+  height: 13.889%;
+  display: flex;
+  border: 1px solid #D8DCDC;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(244, 246, 245, 0.96);
+  backdrop-filter: blur(10px);
+  z-index: 15;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.03);
+  animation: csFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
+}
+
+.cs-countdown-col {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 1.5% 1%;
+}
+
+.cs-countdown-col:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 14%;
+  bottom: 14%;
+  width: 1px;
+  background: #D8DCDC;
+}
+
+.cs-countdown-val {
+  font-family: 'Inter', sans-serif;
+  font-size: min(2.9vw, 3.5vh, 46px);
+  font-weight: 700;
+  color: #0C8B68;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.cs-countdown-lbl {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: min(0.68vw, 1.35vh, 11px);
+  letter-spacing: 0.14em;
+  color: #1F2937;
+  text-transform: uppercase;
+}
+
+/* ===== 4. DESKTOP DYNAMIC SUBSCRIPTION FORM ===== */
+.cs-dynamic-notify-form {
+  position: absolute;
+  left: 4.670%;
+  top: 74.800%;
+  width: 38.5%;
+  height: 8.912%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 60;
+  animation: csFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
+}
+
+.cs-notify-icon-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.cs-notify-circle-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #0C8B68;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 12px rgba(12, 139, 104, 0.25);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.cs-notify-label-text {
+  font-size: min(0.75vw, 1.6vh, 13.5px);
+  color: #2C3E37;
+  line-height: 1.35;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cs-notify-form-fields {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  max-height: 46px;
+  gap: 0;
+}
+
+.cs-input-wrapper {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.cs-notify-email-input {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  padding: 0 18px;
+  border: 1px solid #D1D5DB;
+  border-right: none;
+  border-radius: 23px 0 0 23px;
+  font-size: min(0.75vw, 1.6vh, 13.5px);
+  font-family: 'Inter', sans-serif;
+  background: #FFFFFF;
+  color: #111714;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cs-notify-email-input::placeholder {
+  color: #9CA3AF;
+}
+
+.cs-notify-email-input.invalid {
+  border-color: #0C4137 !important;
+  box-shadow: 0 0 0 3px rgba(12, 65, 55, 0.15) !important;
+}
+
+/* ===== CUSTOM BRANDED VALIDATION TOOLTIP (Forge Studio Color Palette) ===== */
+.cs-custom-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 8px;
+  z-index: 100;
+  animation: csTooltipPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+}
+
+.cs-mobile-tooltip {
+  bottom: calc(100% + 8px);
+  left: 8px;
+}
+
+@keyframes csTooltipPop {
+  0% {
+    opacity: 0;
+    transform: translateY(5px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.cs-tooltip-arrow {
+  position: absolute;
+  bottom: -6px;
+  left: 18px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid #FFFFFF;
+  filter: drop-shadow(0 1px 1px rgba(12, 65, 55, 0.1));
+}
+
+.cs-tooltip-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #FFFFFF;
+  color: #111714;
+  padding: 8px 14px 8px 10px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid #DCE8E4;
+  box-shadow: 0 8px 24px rgba(12, 65, 55, 0.18);
+  white-space: nowrap;
+}
+
+.cs-tooltip-icon-badge {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: #0C4137;
+  color: #00B894;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.cs-notify-submit-btn {
+  height: 100%;
+  padding: 0 24px;
+  background: #0C8B68;
+  color: white;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: min(0.8vw, 1.7vh, 14px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid #0C8B68;
+  border-left: none;
+  border-radius: 0 23px 23px 0;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.15s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cs-notify-submit-btn:hover {
+  background: #097255;
+  transform: scale(1.01);
+}
+
+.cs-notify-submit-btn:active {
+  transform: scale(0.98);
+}
+
+/* ===== 5. DESKTOP DYNAMIC FOOTER BAR ===== */
+.cs-dynamic-footer {
+  position: absolute;
+  left: 4.396%;
+  top: 86.343%;
+  width: 91.209%;
+  height: 10.648%;
+  background: #0D2B24;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  color: white;
+  z-index: 15;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: csFadeIn 0.8s ease-out 0.3s backwards;
+}
+
+.cs-footer-link-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: min(0.8vw, 1.6vh, 14px);
+  font-weight: 500;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+  position: relative;
+}
+
+.cs-footer-link-item:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.cs-footer-link-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -28px;
+  top: -4px;
+  bottom: -4px;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.cs-footer-icon-svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.cs-footer-social-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cs-footer-follow-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: min(0.8vw, 1.6vh, 14px);
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+}
+
+.cs-footer-social-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0C8B68;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  text-decoration: none;
+}
+
+.cs-footer-social-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.85;
+}
+
+/* ===== 6. DEDICATED MOBILE COMPOSITION (<= 1023px) ===== */
+.cs-mobile-page {
+  width: 100vw;
+  min-height: 100dvh;
+  background: #F7F9F8;
+  color: #111714;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 24px 0 40px 0;
+}
+
+.cs-mobile-content {
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Mobile Header */
+.cs-mobile-header {
+  width: calc(100% - 32px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.cs-mobile-logo-img {
+  width: min(50vw, 180px);
+  height: auto;
+  object-fit: contain;
+}
+
+/* Mobile Hero Stack */
+.cs-mobile-hero-stack {
+  width: calc(100% - 32px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.cs-mobile-hero-img {
+  display: block;
+  height: auto;
+  object-fit: contain;
+}
+
+.cs-mobile-something-img {
+  width: min(72vw, 320px);
+}
+
+.cs-mobile-coming-soon-img {
+  width: 100%;
+}
+
+.cs-mobile-forge-hero-img {
+  width: 96%;
+}
+
+.cs-mobile-desc-img {
+  width: 90%;
+  margin-top: 4px;
+}
+
+/* Mobile 3D Cloth Reveal Stage Visual (Full Width Edge-to-Edge) */
+.cs-mobile-reveal-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+  margin-bottom: 0;
+  background: #F7F9F8;
+}
+
+.cs-mobile-reveal-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.cs-mobile-countdown-container {
+  width: calc(100% - 32px);
+  display: flex;
+  justify-content: center;
+}
+
+/* Mobile Countdown Timer (Strict 1-Line Layout across all Mobiles) */
+.cs-mobile-countdown {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid #D8DCDC;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(244, 246, 245, 0.96);
+  padding: 14px 4px;
+  margin-top: -12px;
+  margin-bottom: 28px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+  position: relative;
+  z-index: 10;
+}
+
+.cs-mobile-countdown-col {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cs-mobile-countdown-col:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 1px;
+  background: #D8DCDC;
+}
+
+.cs-mobile-countdown-val {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(20px, 6.2vw, 36px);
+  font-weight: 700;
+  color: #0C8B68;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.cs-mobile-countdown-lbl {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: clamp(9px, 2.4vw, 11px);
+  letter-spacing: 0.12em;
+  color: #1F2937;
+  text-transform: uppercase;
+}
+
+.cs-mobile-section-container {
+  width: calc(100% - 32px);
+  max-width: 440px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Mobile Subscription Form */
+.cs-mobile-notify {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.cs-mobile-notify-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 2px;
+}
+
+.cs-mobile-circle-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #0C8B68;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.cs-mobile-notify-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #2D3748;
+}
+
+.cs-mobile-notify-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+
+.cs-mobile-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.cs-mobile-email-input {
+  width: 100%;
+  height: 50px;
+  padding: 0 22px;
+  border: 1px solid #D8DCDC;
+  border-radius: 25px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  background: #FFFFFF;
+  color: #111714;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cs-mobile-email-input.invalid {
+  border-color: #0C4137 !important;
+  box-shadow: 0 0 0 3px rgba(12, 65, 55, 0.2) !important;
+}
+
+.cs-mobile-email-input::placeholder {
+  color: #94A3B8;
+}
+
+.cs-mobile-submit-btn {
+  height: 50px;
+  width: 100%;
+  padding: 0 20px;
+  background: #0F8265;
+  color: white;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(15, 130, 101, 0.2);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cs-btn-text-wrap {
+  pointer-events: none;
+}
+
+.cs-mobile-validation-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #FFFFFF;
+  color: #111714;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #0C4137;
+  box-shadow: 0 4px 16px rgba(12, 65, 55, 0.15);
+  margin-top: 2px;
+  animation: csTooltipPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Mobile Footer Card */
+.cs-mobile-footer {
+  width: 100%;
+  background: #07251E;
+  border-radius: 20px;
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  margin-bottom: 24px;
+}
+
+.cs-mobile-footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-bottom: 18px;
+}
+
+.cs-mobile-footer-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.cs-mobile-social-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cs-mobile-follow-lbl {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+}
+
+.cs-mobile-social-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cs-mobile-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+/* ===== ADMIN DASHBOARD STYLES ===== */
+.admin-layout {
+  min-height: 100vh;
+  background: #0B0F0E;
+  color: #F5F5F5;
+}
+
+.admin-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 260px;
+  background: #111714;
+  border-right: 1px solid #1E2D27;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+}
+
+.admin-sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #1E2D27;
+}
+
+.admin-sidebar-logo img {
+  width: 36px;
+  height: 36px;
+}
+
+.admin-sidebar-logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-sidebar-logo-text .title {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 4px;
+  color: #F5F5F5;
+  text-transform: uppercase;
+}
+
+.admin-sidebar-logo-text .subtitle {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #0C8B68;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.admin-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: #A6B8B1;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.admin-nav-link:hover {
+  background: #1E2D27;
+  color: #F5F5F5;
+}
+
+.admin-nav-link.active {
+  background: #0C8B68;
+  color: white;
+}
+
+.admin-nav-link svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.admin-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: #DC2626;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  transition: background 0.2s;
+  margin-top: auto;
+}
+
+.admin-logout-btn:hover {
+  background: rgba(220, 38, 38, 0.1);
+}
+
+.admin-main {
+  margin-left: 260px;
+  padding: 32px;
+  min-height: 100vh;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.admin-header h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: #F5F5F5;
+}
+
+.admin-card {
+  background: #111714;
+  border: 1px solid #1E2D27;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.admin-card h2 {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: #0C8B68;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.admin-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.admin-stat-card {
+  background: #111714;
+  border: 1px solid #1E2D27;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.admin-stat-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: #0C8B68;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.admin-stat-label {
+  font-size: 12px;
+  color: #A6B8B1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.admin-form-group {
+  margin-bottom: 16px;
+}
+
+.admin-form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #A6B8B1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.admin-input {
+  width: 100%;
+  padding: 10px 14px;
+  background: #0B0F0E;
+  border: 1px solid #1E2D27;
+  border-radius: 8px;
+  color: #F5F5F5;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.admin-input:focus {
+  border-color: #0C8B68;
+}
+
+.admin-input::placeholder {
+  color: #586760;
+}
+
+.admin-btn {
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.admin-btn-primary {
+  background: #0C8B68;
+  color: white;
+}
+
+.admin-btn-primary:hover {
+  background: #097255;
+}
+
+.admin-btn-danger {
+  background: transparent;
+  color: #DC2626;
+  border: 1px solid #DC2626;
+}
+
+.admin-btn-danger:hover {
+  background: rgba(220, 38, 38, 0.1);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #A6B8B1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #1E2D27;
+}
+
+.admin-table td {
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #F5F5F5;
+  border-bottom: 1px solid #1E2D27;
+}
+
+.admin-table tr:hover td {
+  background: rgba(12, 139, 104, 0.05);
+}
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0B0F0E;
+}
+
+.login-card {
+  background: #111714;
+  border: 1px solid #1E2D27;
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-card h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 4px;
+  text-align: center;
+  color: #F5F5F5;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.login-card p {
+  text-align: center;
+  color: #A6B8B1;
+  font-size: 13px;
+  margin-bottom: 32px;
+}
+
+.login-error {
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  color: #DC2626;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+/* ==================================================
+   COMPLETE MICRO-ANIMATION SYSTEM
+   ================================================== */
+
+/* 1. Entry Stagger Reveal Keyframes */
+@keyframes csEntryFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(var(--entry-ty, 8px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes csEntryFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes csEntryVisualFade {
+  from {
+    opacity: 0.96;
+    transform: scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Entry Step Delays & Durations */
+.cs-entry-step-1 {
+  animation: csEntryFadeUp 450ms cubic-bezier(0.22, 1, 0.36, 1) 0ms forwards;
+  opacity: 0;
+}
+
+.cs-entry-step-2 {
+  animation: csEntryFadeIn 350ms cubic-bezier(0.22, 1, 0.36, 1) 100ms forwards;
+  opacity: 0;
+}
+
+.cs-entry-step-3 {
+  animation: csEntryFadeUp 500ms cubic-bezier(0.22, 1, 0.36, 1) 200ms forwards;
+  --entry-ty: 10px;
+  opacity: 0;
+}
+
+.cs-entry-step-4 {
+  animation: csEntryFadeUp 400ms cubic-bezier(0.22, 1, 0.36, 1) 300ms forwards;
+  --entry-ty: 6px;
+  opacity: 0;
+}
+
+.cs-entry-step-5 {
+  animation: csEntryFadeIn 350ms cubic-bezier(0.22, 1, 0.36, 1) 400ms forwards;
+  opacity: 0;
+}
+
+.cs-entry-step-6 {
+  animation: csEntryVisualFade 700ms cubic-bezier(0.22, 1, 0.36, 1) 500ms forwards;
+  opacity: 0;
+}
+
+.cs-entry-step-7 {
+  animation: csEntryFadeUp 400ms cubic-bezier(0.22, 1, 0.36, 1) 600ms forwards;
+  --entry-ty: 8px;
+  opacity: 0;
+}
+
+.cs-entry-step-8 {
+  animation: csEntryFadeUp 400ms cubic-bezier(0.22, 1, 0.36, 1) 700ms forwards;
+  --entry-ty: 8px;
+  opacity: 0;
+}
+
+.cs-entry-step-9 {
+  animation: csEntryFadeIn 450ms cubic-bezier(0.22, 1, 0.36, 1) 800ms forwards;
+  opacity: 0;
+}
+
+/* 2. Coming Soon Sheen Sweep (Runs ONCE after step 3 appears) */
+.cs-coming-soon-wrapper {
+  position: absolute;
+  left: 4.725%;
+  top: 25.579%;
+  width: 36.209%;
+  height: 14.005%;
+  overflow: hidden;
+  display: block;
+  z-index: 10;
+}
+
+.cs-coming-soon-wrapper .cs-asset-coming-soon {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.cs-mobile-hero-stack .cs-coming-soon-wrapper {
+  position: relative;
+  left: auto;
+  top: auto;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  display: block;
+}
+
+.cs-mobile-hero-stack .cs-coming-soon-wrapper .cs-asset-coming-soon {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.cs-sheen-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(255, 255, 255, 0.32) 50%,
+    rgba(12, 139, 104, 0.18) 65%,
+    transparent 100%
+  );
+  transform: translateX(-120%);
+  animation: csSheenSweep 900ms cubic-bezier(0.22, 1, 0.36, 1) 750ms 1 forwards;
+}
+
+@keyframes csSheenSweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+/* 3. Desktop Ambient Stage Breathing & Glow Overlays */
+@media (min-width: 1024px) {
+  .cs-desktop-right-stage {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 60%;
+    height: 100%;
+    pointer-events: none;
+    animation: csAmbientBreathing 18s ease-in-out infinite alternate;
+  }
+
+  @keyframes csAmbientBreathing {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.008); }
+  }
+
+  /* Platform Green Ambient Glow Layer */
+  .cs-platform-glow-overlay {
+    position: absolute;
+    bottom: 6%;
+    right: 12%;
+    width: 55%;
+    height: 38%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(12, 139, 104, 0.36) 0%, rgba(12, 139, 104, 0.08) 55%, transparent 75%);
+    pointer-events: none;
+    animation: csPlatformGlowPulse 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes csPlatformGlowPulse {
+    0% { opacity: 0.30; }
+    50% { opacity: 0.45; }
+    100% { opacity: 0.30; }
+  }
+
+  /* Cloth Logo Highlight Sweep */
+  .cs-cloth-logo-highlight {
+    position: absolute;
+    top: 32%;
+    right: 22%;
+    width: 32%;
+    height: 32%;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.15;
+    transition: transform 300ms ease-out;
+  }
+
+  .cs-cloth-logo-highlight::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      115deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.22) 45%,
+      rgba(255, 255, 255, 0.38) 50%,
+      transparent 60%
+    );
+    transform: translateX(-150%);
+    animation: csLogoHighlightSweep 10s ease-in-out infinite;
+  }
+
+  @keyframes csLogoHighlightSweep {
+    0% { transform: translateX(-150%); }
+    12% { transform: translateX(200%); }
+    100% { transform: translateX(200%); }
+  }
+}
+
+/* 4. Countdown Digit Transition */
+.cs-digit-box {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 1.15em;
+  line-height: 1.15em;
+  vertical-align: bottom;
+}
+
+.cs-digit-static {
+  display: inline-block;
+}
+
+.cs-digit-old {
+  display: inline-block;
+  animation: csDigitSlideOut 240ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.cs-digit-new {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: csDigitSlideIn 240ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes csDigitSlideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-6px);
+    opacity: 0;
+  }
+}
+
+@keyframes csDigitSlideIn {
+  from {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 5. Input Focus Transition */
+.cs-notify-email-input,
+.cs-mobile-email-input {
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.cs-notify-email-input:focus,
+.cs-mobile-email-input:focus {
+  border-color: #0C8B68 !important;
+  box-shadow: 0 0 0 3px rgba(12, 139, 104, 0.15) !important;
+}
+
+/* 6. Button Hover & Click */
+.cs-notify-submit-btn,
+.cs-mobile-submit-btn {
+  transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cs-btn-text-wrap {
+  display: inline-block;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cs-notify-submit-btn:hover,
+  .cs-mobile-submit-btn:hover {
+    transform: translateY(-1px);
+    background-color: #0E9B74 !important;
+    box-shadow: 0 4px 16px rgba(12, 139, 104, 0.28);
+  }
+}
+
+.cs-notify-submit-btn:active,
+.cs-mobile-submit-btn:active {
+  transform: scale(0.98) !important;
+  transition-duration: 110ms !important;
+}
+
+/* Button Success State */
+.cs-btn-success {
+  background-color: #0C8B68 !important;
+}
+
+/* Paper Plane Icon Motion on Success */
+.cs-icon-plane-success {
+  animation: csPlaneIconBounce 400ms ease-in-out forwards;
+}
+
+@keyframes csPlaneIconBounce {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+/* 7. Footer Link Hover Animations (Desktop) */
+@media (hover: hover) and (pointer: fine) {
+  .cs-footer-link-item,
+  .cs-footer-social-btn,
+  .cs-mobile-footer-item,
+  .cs-mobile-social-link {
+    transition: transform 200ms ease, filter 200ms ease, opacity 200ms ease;
+  }
+
+  .cs-footer-link-item:hover,
+  .cs-footer-social-btn:hover,
+  .cs-mobile-footer-item:hover,
+  .cs-mobile-social-link:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.12);
+  }
+}
+
+/* Mobile Active Tap States */
+.cs-mobile-footer-item:active,
+.cs-mobile-social-link:active {
+  transform: scale(0.96);
+}
+
+/* 8. Prefers-Reduced-Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .cs-sheen-overlay,
+  .cs-cloth-logo-highlight,
+  .cs-desktop-right-stage,
+  .cs-platform-glow-overlay {
+    animation: none !important;
+  }
 }
